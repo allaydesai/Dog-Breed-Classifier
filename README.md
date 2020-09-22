@@ -51,17 +51,19 @@ This is the error rate
 
 ### Dog Breed Detection using CNN from Scratch
 
-| CNN Architecture  |
-|----------|
-| Conv3-64 |
-| Conv64-128 |
-| Conv128-256 |
-| Conv256-512 |
-| Conv512-512 |
-| Flatten7*7*512 |
-| FC25088-512 |
-| Dropout |
-| FC512-133|
+**CNN Architecture**
+
+| Layer Name | Description |
+|-----|----------:|
+| Conv1 | Conv_3-64 |
+| Conv2 | Conv_64-128 |
+| Conv3 | Conv_128-256 |
+| Conv4 | Conv_256-512 |
+| Conv5 | Conv_512-512 |
+| Flatten | Flatten_7*7*512 |
+| FC1 | FC_25088-512 |
+| Dropout | Dropout |
+| FC2 | FC_512-133|
 
 **NOTE**: Each convolution layer has a Relu Activation function followed by Max pooling.
 
@@ -74,10 +76,12 @@ Optimizer: Adam Optimizer
 
 ### Dog Breed Detection using Transfer Learning
 
-To acheive this I chose the VGG16 Model. Used its feature detection layers and pre-trained weights, while attaching my own classifer (Fully-Connected Network) 
+To acheive this I chose the ResNet50 Model. Used its feature detection layers and pre-trained weights, while attaching my own classifer (Fully-Connected Network) 
+
+FC_2048-133
 
 Loss Function: Cross Entropy Loss
-Optimizer: Adam Optimizer
+Optimizer: SGD Optimizer
 
 **Training Results**
 
