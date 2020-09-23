@@ -72,7 +72,16 @@ Optimizer: Adam Optimizer
 
 **Training Results**
 
+Training Loss: 2.827422 	
+
+Validation Loss: 3.564928
+
 **Test Results**
+
+Test Loss: 3.561034
+
+Test Accuracy: 18% (154/836)
+
 
 ### Dog Breed Detection using Transfer Learning
 
@@ -85,6 +94,14 @@ Optimizer: SGD Optimizer
 
 **Training Results**
 
+Training Loss: 0.757137 	
+
+Validation Loss: 0.721440
+
 **Test Results**
+
+Test Loss: 0.715865
+
+Test Accuracy: 86% (720/836)
 
 
