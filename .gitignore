@@ -2,3 +2,4 @@ lfw
 dogImages
 haarcascades
 __MACOSX
+*.pt
