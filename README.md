@@ -3,66 +3,151 @@
 [image1]: ./images/sample_dog_output.png "Sample Output"
 [image2]: ./images/vgg16_model.png "VGG-16 Model Layers"
 [image3]: ./images/vgg16_model_draw.png "VGG16 Model Figure"
+[image4]: ./images/img1.png "Result Image 1"
+[image5]: ./images/img1.png "Result Image 2"
+[image6]: ./images/img1.png "Result Image 3"
+[image7]: ./images/img1.png "Result Image 4"
+[image8]: ./images/img1.png "Result Image 5"
+[image9]: ./images/img1.png "Result Image 6"
 
 
-## Project Overview
+## OVERVIEW
 
-Welcome to the Convolutional Neural Networks (CNN) project in the AI Nanodegree! In this project, you will learn how to build a pipeline that can be used within a web or mobile app to process real-world, user-supplied images.  Given an image of a dog, your algorithm will identify an estimate of the canine’s breed.  If supplied an image of a human, the code will identify the resembling dog breed.  
+In this project, I built a pipeline that can be used within a web or mobile app to process real-world, user-supplied images.  Given an image of a dog, the algorithm identifies an estimate of the canine’s breed.  If supplied an image of a human, the code will identify the resembling dog breed.  
 
 ![Sample Output][image1]
 
-Along with exploring state-of-the-art CNN models for classification and localization, you will make important design decisions about the user experience for your app.  Our goal is that by completing this lab, you understand the challenges involved in piecing together a series of models designed to perform various tasks in a data processing pipeline.  Each model has its strengths and weaknesses, and engineering a real-world application often involves solving many problems without a perfect answer.  Your imperfect solution will nonetheless create a fun user experience!
+Along with exploring state-of-the-art CNN models for classification and localization, There are important design decisions about the user experience for your app.  The goal is to understand the challenges involved in piecing together a series of models designed to perform various tasks in a data processing pipeline.  Each model has its strengths and weaknesses, and engineering a real-world application often involves solving many problems without a perfect answer.  This imperfect solution nonetheless creates a fun user experience!
+
+## FILES
+
+- dog_app.ipynb (Notebook containing code)
+- report.pdf (Pdf version of notebook)
+- images (images for README)
+- README.md
+
+## DATASETS
+
+- [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip)
+- [human dataset](http://vis-www.cs.umass.edu/lfw/lfw.tgz)
+
+## RESULTS
+
+### Face Detection
+OpenCV's implementation of Haar feature-based cascade classifiers to detect human faces in images.
+
+[image]
+
+100%, Total 100 human faces found in 100 human images
+This is the accuracy
+
+16%, Total 16 human faces found in 100 dog images
+This is the error rate
+
+### Dog Detection
+
+Detect Dogs using VGG-16 model, along with weights that have been trained on ImageNet. Dictionary keys 151-268, inclusive are dog breeds.
 
 
-## Project Instructions
+100.0%, Total 100 dog faces found in 100 dog images
+This is the accuracy
 
-### Instructions
+0.0%, Total 0 dog faces found in 100 human images
+This is the error rate
 
-1. Clone the repository and navigate to the downloaded folder.
-	
-	```	
-		git clone https://github.com/udacity/deep-learning-v2-pytorch.git
-		cd deep-learning-v2-pytorch/project-dog-classification
-	```
-	
-__NOTE:__ if you are using the Udacity workspace, you *DO NOT* need to re-download the datasets in steps 2 and 3 - they can be found in the `/data` folder as noted within the workspace Jupyter notebook.
+### Dog Breed Detection using CNN from Scratch
 
-2. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/dogImages`.  The `dogImages/` folder should contain 133 folders, each corresponding to a different dog breed.
-3. Download the [human dataset](http://vis-www.cs.umass.edu/lfw/lfw.tgz).  Unzip the folder and place it in the repo, at location `path/to/dog-project/lfw`.  If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
-4. Make sure you have already installed the necessary Python packages according to the README in the program repository.
-5. Open a terminal window and navigate to the project folder. Open the notebook and follow the instructions.
-	
-	```
-		jupyter notebook dog_app.ipynb
-	```
+**CNN Architecture**
 
-__NOTE:__ While some code has already been implemented to get you started, you will need to implement additional functionality to successfully answer all of the questions included in the notebook. __Unless requested, do not modify code that has already been included.__
+| Layer Name | Description |
+|-----|----------:|
+| Conv1 | Conv_3-64 |
+| Conv2 | Conv_64-128 |
+| Conv3 | Conv_128-256 |
+| Conv4 | Conv_256-512 |
+| Conv5 | Conv_512-512 |
+| Flatten | Flatten_7*7*512 |
+| FC1 | FC_25088-512 |
+| Dropout | Dropout |
+| FC2 | FC_512-133|
 
-__NOTE:__ In the notebook, you will need to train CNNs in PyTorch.  If your CNN is taking too long to train, feel free to pursue one of the options under the section __Accelerating the Training Process__ below.
+**NOTE**: Each convolution layer has a Relu Activation function followed by Max pooling.
 
+Loss Function: Cross Entropy Loss
+Optimizer: Adam Optimizer
 
+**Training Results**
 
-## (Optionally) Accelerating the Training Process 
+Training Loss: 2.827422 	
 
-If your code is taking too long to run, you will need to either reduce the complexity of your chosen CNN architecture or switch to running your code on a GPU.  If you'd like to use a GPU, you can spin up an instance of your own:
+Validation Loss: 3.564928
 
-#### Amazon Web Services
+**Test Results**
 
-You can use Amazon Web Services to launch an EC2 GPU instance. (This costs money, but enrolled students should see a coupon code in their student `resources`.)
+Test Loss: 3.561034
 
-## Evaluation
-
-Your project will be reviewed by a Udacity reviewer against the CNN project rubric.  Review this rubric thoroughly and self-evaluate your project before submission.  All criteria found in the rubric must meet specifications for you to pass.
+Test Accuracy: 18% (154/836)
 
 
-## Project Submission
+### Dog Breed Detection using Transfer Learning
 
-Your submission should consist of the github link to your repository.  Your repository should contain:
-- The `dog_app.ipynb` file with fully functional code, all code cells executed and displaying output, and all questions answered.
-- An HTML or PDF export of the project notebook with the name `report.html` or `report.pdf`.
+To acheive this I chose the ResNet50 Model. Used its feature detection layers and pre-trained weights, while attaching my own classifer (Fully-Connected Network) 
 
-Please do __NOT__ include any of the project data sets provided in the `dogImages/` or `lfw/` folders.
+FC_2048-133
 
-### Ready to submit your project?
+Loss Function: Cross Entropy Loss
+Optimizer: SGD Optimizer
 
-Click on the "Submit Project" button in the classroom and follow the instructions to submit!
+**Training Results**
+
+Training Loss: 0.757137 	
+
+Validation Loss: 0.721440
+
+**Test Results**
+
+Test Loss: 0.715865
+
+Test Accuracy: 86% (720/836)
+
+### Results
+
+![image4]
+
+Hello, Human!
+You look like a Dogue de bordeaux
+
+--
+
+![image5]
+
+Hello, Human!
+You look like a Dogue de bordeaux
+
+--
+
+![image6]
+
+Hello, Human!
+You look like a Dachshund
+
+--
+
+![image7]
+
+Dog Detected!
+Detected Dog is a Brittany
+
+--
+
+![image8]
+
+Dog Detected!
+Detected Dog is a Brittany
+
+--
+
+![image9]
+
+Hello, Human!
+You look like a English springer spaniel
