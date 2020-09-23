@@ -3,6 +3,12 @@
 [image1]: ./images/sample_dog_output.png "Sample Output"
 [image2]: ./images/vgg16_model.png "VGG-16 Model Layers"
 [image3]: ./images/vgg16_model_draw.png "VGG16 Model Figure"
+[image4]: ./images/img1.png "Result Image 1"
+[image5]: ./images/img1.png "Result Image 2"
+[image6]: ./images/img1.png "Result Image 3"
+[image7]: ./images/img1.png "Result Image 4"
+[image8]: ./images/img1.png "Result Image 5"
+[image9]: ./images/img1.png "Result Image 6"
 
 
 ## OVERVIEW
@@ -104,4 +110,44 @@ Test Loss: 0.715865
 
 Test Accuracy: 86% (720/836)
 
+### Results
 
+![image4]
+
+Hello, Human!
+You look like a Dogue de bordeaux
+
+--
+
+![image5]
+
+Hello, Human!
+You look like a Dogue de bordeaux
+
+--
+
+![image6]
+
+Hello, Human!
+You look like a Dachshund
+
+--
+
+![image7]
+
+Dog Detected!
+Detected Dog is a Brittany
+
+--
+
+![image8]
+
+Dog Detected!
+Detected Dog is a Brittany
+
+--
+
+![image9]
+
+Hello, Human!
+You look like a English springer spaniel
